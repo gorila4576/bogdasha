@@ -1,0 +1,54 @@
+photo1 = 0
+y=0
+dy=200
+dx=0
+add_library("sound")
+def setup():
+    size(600,600)
+    global photo1,sf
+    size(600, 600)
+    sf = SoundFile(this,"7.mp3")
+    sf.play()
+    photo1 = loadImage("naight.png")    
+    
+def poinr(x,y,size):
+    push()
+    #background(255)
+    translate(x,y)
+    stroke(0,255,255)
+    fill(0,255,255)
+    ellipse(100,100,100,100)
+    triangle(100,0,150,100,50,100)
+    pop()
+def draw():
+    pass
+    global y,dx,dy,photo1
+    image(photo1, 0, 0, 600, 600)
+    y=y+1
+    poinr(0,y,0.1)
+    poinr(100,100+y,0.1)
+    poinr(300,y,0.1)
+    poinr(400,100+y,0.1)
+    if keyCode == DOWN and dy <= 600 and keyPressed:
+        dy=dy+10
+    if keyCode == UP and dy >= -300 and keyPressed:
+        dy=dy-10
+    if keyCode == LEFT and dx <= 800 and keyPressed:
+        dx=dx-10
+    if keyCode == RIGHT and dx >= -300 and keyPressed:
+        dx=dx+10
+    if (dx> -50 and dx < 50 and y<dy and y>dy-2) or (dx> 50 and dx < 150 and y<dy+5 and y>dy-20) or (dx> 250 and dx < 350 and y<dy+200 and y>dy+100) or (dx> 400 and dx< 500 and y<dy+400 and y>dy+100):
+            textSize(60)
+            fill(255,255,0)
+            text("game over",200,200)
+            noLoop()   
+    dima(dx,dy)
+def dima(dx,dy):
+    push()
+    translate(dx,dy)
+    strokeWeight(30)
+    point(100,200)
+    strokeWeight(3)
+    line(100,200,100,250)
+    pop()
+    
